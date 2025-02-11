@@ -23,7 +23,7 @@ export class ArtistsController {
 
   @Post()
   @UseInterceptors(
-    FileInterceptor('image', {dest: './public/images'}),
+    FileInterceptor('image', {dest: './public/images/artists'}),
   )
   async create(
     @Body() artistDto: ArtistDocument,
@@ -32,7 +32,7 @@ export class ArtistsController {
 
     const artist = new this.artistModel({
       name: artistDto.name,
-      image: file ? '/images' + file.filename : null,
+      image: file ? '/images/artists' + file.filename : null,
       information: artistDto.information,
     })
 

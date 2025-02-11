@@ -28,7 +28,7 @@ export class AlbumsController {
 
   @Post()
   @UseInterceptors(
-    FileInterceptor('image', {dest: './public/images'}),
+    FileInterceptor('image', {dest: './public/images/albums'}),
   )
   async create(
     @Body() albumDto: CreateAlbumDto,
@@ -39,7 +39,7 @@ export class AlbumsController {
       artist: albumDto.artist,
       title: albumDto.title,
       date: albumDto.date,
-      image: file ? '/images' + file.filename : null,
+      image: file ? '/images/albums' + file.filename : null,
 
     })
 
