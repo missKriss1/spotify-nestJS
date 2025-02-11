@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Req, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { Artist, ArtistDocument } from '../schemas/artist.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
