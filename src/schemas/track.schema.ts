@@ -8,7 +8,7 @@ export type TrackDocument = Track & Document;
 export class Track {
 
   @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Album' })
-  artist: Album;
+  album: Album;
 
   @Prop({ required: true })
   title: string;
