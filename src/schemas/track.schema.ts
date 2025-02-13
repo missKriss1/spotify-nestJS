@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, {Document} from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { Album } from './album.schema';
 
 export type TrackDocument = Track & Document;
@@ -16,7 +16,7 @@ export class Track {
   continuance: string;
 
   @Prop({ default: 0 })
-  number: Number;
+  number: number;
 }
 
 export const TrackSchema = SchemaFactory.createForClass(Track);

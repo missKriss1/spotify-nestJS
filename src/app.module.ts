@@ -13,12 +13,17 @@ import { Track, TrackSchema } from './schemas/track.schema';
   imports: [
     MongooseModule.forRoot('mongodb://localhost/spotify'),
     MongooseModule.forFeature([
-      {name: Artist.name, schema: ArtistSchema},
-      {name: Album.name, schema: AlbumSchema},
-      {name: Track.name, schema: TrackSchema},
-    ])
+      { name: Artist.name, schema: ArtistSchema },
+      { name: Album.name, schema: AlbumSchema },
+      { name: Track.name, schema: TrackSchema },
+    ]),
   ],
-  controllers: [AppController, ArtistsController, AlbumsController, TracksController],
+  controllers: [
+    AppController,
+    ArtistsController,
+    AlbumsController,
+    TracksController,
+  ],
   providers: [AppService],
 })
 export class AppModule {}

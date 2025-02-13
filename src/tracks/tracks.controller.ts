@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Track, TrackDocument } from '../schemas/track.schema';
@@ -7,7 +15,7 @@ import { Track, TrackDocument } from '../schemas/track.schema';
 export class TracksController {
   constructor(
     @InjectModel(Track.name)
-    private trackModel: Model<TrackDocument>
+    private trackModel: Model<TrackDocument>,
   ) {}
 
   async deleteAll() {
@@ -21,17 +29,15 @@ export class TracksController {
 
   @Get()
   async getAll(@Query('album') album: string) {
-    if(album){
-      return this.trackModel.find({album: album});
-    }else{
+    if (album) {
+      return this.trackModel.find({ album: album });
+    } else {
       return this.trackModel.find();
     }
   }
 
   @Post()
-  async create(
-    @Body() trackDto: TrackDocument,
-  ){
+  async create(@Body() trackDto: TrackDocument) {
     const track = await this.trackModel.create({
       album: trackDto.album,
       title: trackDto.title,
