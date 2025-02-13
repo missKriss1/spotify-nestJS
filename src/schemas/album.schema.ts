@@ -6,7 +6,6 @@ export type AlbumDocument = Album & Document;
 
 @Schema()
 export class Album {
-
   @Prop({ required: true, type:mongoose.Schema.Types.ObjectId, ref: 'Artist' })
   artist: Artist;
 
@@ -18,7 +17,6 @@ export class Album {
 
   @Prop({ default: null })
   image: string;
-
 }
 
 export const AlbumSchema = SchemaFactory.createForClass(Album);

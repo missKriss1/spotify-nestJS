@@ -8,7 +8,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 export class ArtistsController {
   constructor(
     @InjectModel(Artist.name)
-    private artistModel: Model<ArtistDocument>,
+    private artistModel: Model<ArtistDocument>
   ) {}
 
   async deleteAll() {

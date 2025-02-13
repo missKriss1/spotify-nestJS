@@ -9,7 +9,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 export class AlbumsController {
   constructor(
     @InjectModel(Album.name)
-    private albumModel: Model<AlbumDocument>,) {
+    private albumModel: Model<AlbumDocument>) {
   }
 
 

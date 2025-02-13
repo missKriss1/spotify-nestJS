@@ -6,7 +6,6 @@ export type TrackDocument = Track & Document;
 
 @Schema()
 export class Track {
-
   @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Album' })
   album: Album;
 
@@ -18,7 +17,6 @@ export class Track {
 
   @Prop({ default: 0 })
   number: Number;
-
 }
 
 export const TrackSchema = SchemaFactory.createForClass(Track);
