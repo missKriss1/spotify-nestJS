@@ -3,7 +3,15 @@ import { randomUUID } from 'crypto';
 import * as bcrypt from 'bcrypt';
 import { Document } from 'mongoose';
 
-export type UserDocument = User & Document;
+export interface UserDocument extends Document {
+  email: string;
+  password: string;
+  token: string;
+  role: string;
+  displayName?: string;
+  generateToken: () => void;
+  checkPassword: (password: string) => Promise<boolean>;
+}
 
 const SALT_WORK_FACTOR = 10;
 
