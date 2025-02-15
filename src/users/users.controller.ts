@@ -6,7 +6,9 @@ import {
   Post,
   Req,
   Res,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -16,18 +18,26 @@ import { Request, Response } from 'express';
 import { AuthGuard } from '@nestjs/passport';
 import { TokenAuthGuard } from '../token-auth/token-auth.guard';
 import { randomUUID } from 'crypto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('users')
 export class UsersController {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   @Post()
-  registerUser(@Body() registerUserDto: RegisterUserDto) {
+  @UseInterceptors(
+    FileInterceptor('avatar', { dest: './public/images/avatar' }),
+  )
+  registerUser(
+    @Body() registerUserDto: RegisterUserDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
     const user: UserDocument = new this.userModel({
       username: registerUserDto.username,
       password: registerUserDto.password,
       displayName: registerUserDto.displayName,
       role: registerUserDto.role,
+      avatar: file ? '/images/avatar' + file.filename : null,
     });
     user.generateToken();
     return user.save();

@@ -4,6 +4,8 @@ import { Artist, ArtistDocument } from '../schemas/artist.schema';
 import { Model } from 'mongoose';
 import { Album, AlbumDocument } from '../schemas/album.schema';
 import { Track, TrackDocument } from '../schemas/track.schema';
+import { User, UserDocument } from '../schemas/user.schema';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class SeederService {
@@ -14,6 +16,8 @@ export class SeederService {
     private albumModel: Model<AlbumDocument>,
     @InjectModel(Track.name)
     private trackModel: Model<TrackDocument>,
+    @InjectModel(User.name)
+    private userModel: Model<UserDocument>,
   ) {}
 
   async seed() {
@@ -22,8 +26,28 @@ export class SeederService {
     await this.artistModel.deleteMany({});
     await this.albumModel.deleteMany({});
     await this.trackModel.deleteMany({});
+    await this.userModel.deleteMany({});
 
     console.log('collections of MD was cleared ');
+
+    await this.userModel.create(
+      {
+        username: 'Anna',
+        password: '123',
+        token: randomUUID(),
+        role: 'admin',
+        displayName: 'Jane',
+        avatar: 'fixtures/avatar/avatar_1.jpg',
+      },
+      {
+        username: 'Sveta',
+        password: '12345',
+        token: randomUUID(),
+        role: 'user',
+        displayName: 'John',
+        avatar: 'fixtures/avatar/avatar_2.jpg',
+      },
+    );
 
     const [John, Jane] = await this.artistModel.create(
       {
