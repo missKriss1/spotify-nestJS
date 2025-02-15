@@ -24,7 +24,7 @@ export class UsersController {
   @Post()
   registerUser(@Body() registerUserDto: RegisterUserDto) {
     const user: UserDocument = new this.userModel({
-      email: registerUserDto.email,
+      username: registerUserDto.username,
       password: registerUserDto.password,
       displayName: registerUserDto.displayName,
       role: registerUserDto.role,

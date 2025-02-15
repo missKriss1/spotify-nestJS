@@ -4,11 +4,11 @@ import * as bcrypt from 'bcrypt';
 import { Document } from 'mongoose';
 
 export interface UserDocument extends Document {
-  email: string;
+  username: string;
   password: string;
   token: string;
   role: string;
-  displayName?: string;
+  displayName: string;
   generateToken: () => void;
   checkPassword: (password: string) => Promise<boolean>;
 }
@@ -18,14 +18,14 @@ const SALT_WORK_FACTOR = 10;
 @Schema()
 export class User {
   @Prop({ required: true, unique: true })
-  email: string;
+  username: string;
   @Prop({ required: true })
   password: string;
   @Prop({ required: true })
   token: string;
-  @Prop()
+  @Prop({ required: true, default: 'user' })
   role: string;
-  @Prop()
+  @Prop({ required: true })
   displayName: string;
 }
 
