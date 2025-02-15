@@ -5,7 +5,8 @@ import {
   Get,
   Param,
   Post,
-  Query, UseGuards,
+  Query,
+  UseGuards,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
