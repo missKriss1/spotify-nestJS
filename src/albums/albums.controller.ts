@@ -21,15 +21,6 @@ export class AlbumsController {
     @InjectModel(Album.name)
     private albumModel: Model<AlbumDocument>,
   ) {}
-  async deleteAll() {
-    await this.albumModel.deleteMany({});
-  }
-
-  async createMultiple(albumData: any[]) {
-    const albums = await this.albumModel.create(albumData);
-    return albums;
-  }
-
   @Get()
   async getAll(@Query('artist') artist: string) {
     if (artist) {

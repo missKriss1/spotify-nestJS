@@ -19,16 +19,6 @@ export class ArtistsController {
     @InjectModel(Artist.name)
     private artistModel: Model<ArtistDocument>,
   ) {}
-
-  async deleteAll() {
-    await this.artistModel.deleteMany({});
-  }
-
-  async createMultiple(artistsData: any[]) {
-    const artists = await this.artistModel.create(artistsData);
-    return artists;
-  }
-
   @Get()
   getAll() {
     return this.artistModel.find();

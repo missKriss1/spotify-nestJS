@@ -17,16 +17,6 @@ export class TracksController {
     @InjectModel(Track.name)
     private trackModel: Model<TrackDocument>,
   ) {}
-
-  async deleteAll() {
-    await this.trackModel.deleteMany({});
-  }
-
-  async createMultiple(trackData: any[]) {
-    const tracks = await this.trackModel.create(trackData);
-    return tracks;
-  }
-
   @Get()
   async getAll(@Query('album') album: string) {
     if (album) {
