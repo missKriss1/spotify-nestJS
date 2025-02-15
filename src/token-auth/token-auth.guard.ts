@@ -1,4 +1,9 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from '../schemas/user.schema';
 import { Model } from 'mongoose';
@@ -11,13 +16,13 @@ export class TokenAuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req: Request = context.switchToHttp().getRequest();
 
-    const token : string | undefined = req.get('Authorization');
+    const token: string | undefined = req.get('Authorization');
 
     if (!token) {
       throw new UnauthorizedException('No token provided');
     }
 
-    const user: UserDocument | null = await this.userModel.findOne({token})
+    const user: UserDocument | null = await this.userModel.findOne({ token });
 
     if (!user) {
       throw new UnauthorizedException('Invalid token provided');

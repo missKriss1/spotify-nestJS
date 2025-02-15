@@ -12,6 +12,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Track, TrackDocument } from '../schemas/track.schema';
 import { TokenAuthGuard } from '../token-auth/token-auth.guard';
+import { RoleGuard } from '../token-auth/role.graud';
+import { SetRoles } from '../token-auth/director/setRoles';
 
 @Controller('tracks')
 export class TracksController {
@@ -29,6 +31,7 @@ export class TracksController {
     }
   }
 
+  @UseGuards(TokenAuthGuard)
   @Post()
   async create(@Body() trackDto: TrackDocument) {
     const track = await this.trackModel.create({
@@ -41,6 +44,9 @@ export class TracksController {
     return await track.save();
   }
 
+  @UseGuards(TokenAuthGuard)
+  @UseGuards(RoleGuard)
+  @SetRoles('admin')
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.trackModel.findByIdAndDelete(id);
