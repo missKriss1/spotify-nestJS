@@ -5,13 +5,14 @@ import {
   Get,
   Param,
   Post,
-  UploadedFile,
+  UploadedFile, UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { Artist, ArtistDocument } from '../schemas/artist.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { TokenAuthGuard } from '../token-auth/token-auth.guard';
 
 @Controller('artists')
 export class ArtistsController {
@@ -19,6 +20,7 @@ export class ArtistsController {
     @InjectModel(Artist.name)
     private artistModel: Model<ArtistDocument>,
   ) {}
+  @UseGuards(TokenAuthGuard)
   @Get()
   getAll() {
     return this.artistModel.find();

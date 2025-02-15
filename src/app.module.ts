@@ -12,6 +12,7 @@ import { User, UserSchema } from './schemas/user.schema';
 import { UsersController } from './users/users.controller';
 import { AuthService } from './auth/auth.service';
 import { LocalStrategy } from './local.strategy';
+import { TokenAuthGuard } from './token-auth/token-auth.guard';
 
 @Module({
   imports: [
@@ -30,6 +31,6 @@ import { LocalStrategy } from './local.strategy';
     TracksController,
     UsersController,
   ],
-  providers: [AppService, AuthService, LocalStrategy],
+  providers: [AppService, AuthService, LocalStrategy, TokenAuthGuard],
 })
 export class AppModule {}

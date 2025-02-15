@@ -5,11 +5,12 @@ import {
   Get,
   Param,
   Post,
-  Query,
+  Query, UseGuards,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Track, TrackDocument } from '../schemas/track.schema';
+import { TokenAuthGuard } from '../token-auth/token-auth.guard';
 
 @Controller('tracks')
 export class TracksController {
@@ -17,6 +18,7 @@ export class TracksController {
     @InjectModel(Track.name)
     private trackModel: Model<TrackDocument>,
   ) {}
+  @UseGuards(TokenAuthGuard)
   @Get()
   async getAll(@Query('album') album: string) {
     if (album) {
